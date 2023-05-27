@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:music_app_figma_ui/features/hub/hub.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../../common_widgets/appbar.dart';
 import '../../constants/constants.dart';
-import '../home/home_screen.dart';
 import 'widgets/rounded_button.dart';
 import 'widgets/welcome_pageview.dart';
 
@@ -35,7 +35,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
         PageTransition(
           duration: const Duration(milliseconds: 750),
           type: PageTransitionType.fade,
-          child: const HomeScreen(),
+          child: const Hub(),
         ),
       );
 

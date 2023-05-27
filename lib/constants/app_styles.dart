@@ -36,6 +36,14 @@ final kInterRegular = GoogleFonts.inter(
   color: kWhite,
   fontWeight: FontWeight.w400,
 );
+final kUrbanistSemiBold = GoogleFonts.urbanist(
+  color: kWhite,
+  fontWeight: FontWeight.w600,
+);
+final kUrbanistMedium = GoogleFonts.urbanist(
+  color: kWhite,
+  fontWeight: FontWeight.w500,
+);
 
 final kBorderRadiusCircular21 = BorderRadius.circular(21);
 final kBorderRadiusCircular16 = BorderRadius.circular(16);

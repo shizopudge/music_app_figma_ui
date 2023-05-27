@@ -5,7 +5,7 @@ import '../../../animations/fade_animation_x.dart';
 import '../../../constants/constants.dart';
 
 class TrackList extends StatelessWidget {
-  final VoidCallback onTap;
+  final void Function({required String imagePath, required int index}) onTap;
   const TrackList({
     super.key,
     required this.onTap,
@@ -22,7 +22,9 @@ class TrackList extends StatelessWidget {
         itemCount: 10,
         itemBuilder: (context, index) {
           late final int imageIndex;
-          if (index % 2 == 0) {
+          if (index % 3 == 0) {
+            imageIndex = 3;
+          } else if (index % 2 == 0) {
             imageIndex = 2;
           } else {
             imageIndex = 1;
@@ -35,41 +37,46 @@ class TrackList extends StatelessWidget {
               ),
               width: 149,
               child: GestureDetector(
-                onTap: onTap,
+                onTap: () => onTap(
+                    imagePath: 'assets/images/track$imageIndex.png',
+                    index: index),
                 child: Column(
                   children: [
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 7),
-                      height: 139,
-                      decoration: BoxDecoration(
-                        borderRadius: kBorderRadiusCircular16,
-                        image: DecorationImage(
-                          image: AssetImage(
-                            'assets/images/track$imageIndex.png',
-                          ),
-                          fit: BoxFit.cover,
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: kLightDarkBlue.withOpacity(.7),
-                            offset: const Offset(
-                              1.5,
-                              0.0,
+                    Hero(
+                      tag: 'hero$index',
+                      child: Container(
+                        margin: const EdgeInsets.only(bottom: 7),
+                        height: 139,
+                        decoration: BoxDecoration(
+                          borderRadius: kBorderRadiusCircular16,
+                          image: DecorationImage(
+                            image: AssetImage(
+                              'assets/images/track$imageIndex.png',
                             ),
-                            blurRadius: 5.0,
-                            spreadRadius: 2.0,
+                            fit: BoxFit.cover,
                           ),
-                        ],
-                      ),
-                      child: Align(
-                        alignment: Alignment.bottomRight,
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            right: 7,
-                            bottom: 3,
-                          ),
-                          child: SvgPicture.asset(
-                            'assets/icons/play.svg',
+                          boxShadow: [
+                            BoxShadow(
+                              color: kLightDarkBlue.withOpacity(.7),
+                              offset: const Offset(
+                                1.5,
+                                0.0,
+                              ),
+                              blurRadius: 5.0,
+                              spreadRadius: 2.0,
+                            ),
+                          ],
+                        ),
+                        child: Align(
+                          alignment: Alignment.bottomRight,
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              right: 7,
+                              bottom: 3,
+                            ),
+                            child: SvgPicture.asset(
+                              'assets/icons/play.svg',
+                            ),
                           ),
                         ),
                       ),

@@ -48,7 +48,9 @@ class RecentlyTracks extends StatelessWidget {
                       width / index;
                     }
                     late final int imageIndex;
-                    if (index % 2 == 0) {
+                    if (index % 3 == 0) {
+                      imageIndex = 3;
+                    } else if (index % 2 == 0) {
                       imageIndex = 2;
                     } else {
                       imageIndex = 1;
@@ -56,7 +58,7 @@ class RecentlyTracks extends StatelessWidget {
                     return Positioned(
                       key: UniqueKey(),
                       top: index * 5,
-                      left: index * 12,
+                      left: index * 13,
                       bottom: index * 5,
                       child: Container(
                         height: height,
