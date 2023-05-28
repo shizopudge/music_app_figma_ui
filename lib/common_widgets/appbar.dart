@@ -8,7 +8,10 @@ appbar({Text? title}) => AppBar(
       elevation: 0,
       backgroundColor: Colors.transparent,
       centerTitle: true,
-      title: title,
+      title: FadeAnimationY(
+        delay: 1,
+        child: title ?? const SizedBox(),
+      ),
       leading: FadeAnimationY(
         delay: 1,
         child: Align(

@@ -37,9 +37,13 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   final _searchDebouncedFunc = debounce(
-    (final String query) => debugPrint(
-      'Search $query...',
-    ),
+    (final String query) {
+      if (query.isNotEmpty) {
+        debugPrint(
+          'Search $query...',
+        );
+      }
+    },
     const Duration(
       milliseconds: 1000,
     ),
@@ -56,13 +60,14 @@ class _HomeScreenState extends State<HomeScreen> {
         context,
         PageTransition(
           duration: const Duration(milliseconds: 350),
+          fullscreenDialog: true,
           type: PageTransitionType.fade,
           child: TrackScreen(
             imagePath: imagePath,
             index: index,
           ),
         ),
-      );
+      ).whenComplete(() => primaryFocus?.unfocus());
 
   @override
   Widget build(BuildContext context) {

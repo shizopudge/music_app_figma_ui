@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../common_widgets/appbar.dart';
 import '../../constants/constants.dart';
+import 'widgets/track_buttons.dart';
+import 'widgets/track_image.dart';
+import 'widgets/track_like_button.dart';
+import 'widgets/track_slider.dart';
+import 'widgets/track_title.dart';
 
 class TrackScreen extends StatefulWidget {
   final String imagePath;
@@ -44,21 +48,9 @@ class _TrackScreenState extends State<TrackScreen> {
       ),
       body: Column(
         children: [
-          Hero(
-            tag: 'hero${widget.index}',
-            child: Container(
-              height: 280,
-              margin: const EdgeInsets.symmetric(horizontal: 40),
-              decoration: BoxDecoration(
-                borderRadius: kBorderRadiusCircular16,
-                image: DecorationImage(
-                  image: AssetImage(
-                    widget.imagePath,
-                  ),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+          TrackImage(
+            index: widget.index,
+            imagePath: widget.imagePath,
           ),
           const SizedBox(
             height: 16,
@@ -69,47 +61,12 @@ class _TrackScreenState extends State<TrackScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'The Captain',
-                      style: kLatoRegular.copyWith(
-                        fontSize: 14,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 2,
-                    ),
-                    Text(
-                      'DANNY AVILA',
-                      style: kUrbanistSemiBold.copyWith(
-                        fontSize: 15,
-                      ),
-                    ),
-                  ],
+                const TrackTitle(
+                  trackName: 'The Captain',
+                  author: 'DANNY AVILA',
                 ),
-                ValueListenableBuilder(
-                  valueListenable: _isLikedNotifier,
-                  builder: (context, isLiked, _) => GestureDetector(
-                    onTap: () {
-                      if (isLiked) {
-                        _isLikedNotifier.value = false;
-                      } else {
-                        _isLikedNotifier.value = true;
-                      }
-                    },
-                    child: SvgPicture.asset(
-                      'assets/icons/favorite.svg',
-                      height: 24,
-                      width: 24,
-                      fit: BoxFit.cover,
-                      colorFilter: ColorFilter.mode(
-                        isLiked ? kOrange : kLightGrey,
-                        BlendMode.srcIn,
-                      ),
-                    ),
-                  ),
+                TrackLikeButton(
+                  isLikedNotifier: _isLikedNotifier,
                 ),
               ],
             ),
@@ -117,31 +74,16 @@ class _TrackScreenState extends State<TrackScreen> {
           const SizedBox(
             height: 48,
           ),
-          Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 33),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '2.01',
-                      style: kUrbanistMedium.copyWith(fontSize: 15),
-                    ),
-                    Text(
-                      '-1.07',
-                      style: kUrbanistMedium.copyWith(fontSize: 15),
-                    ),
-                  ],
-                ),
-              ),
-              Slider(
-                value: .7,
-                onChanged: (value) {},
-                activeColor: kWhite,
-                inactiveColor: kGrey,
-              ),
-            ],
+          const TrackSlider(
+            past: 2.01,
+            left: -1.07,
+          ),
+          const SizedBox(
+            height: 17,
+          ),
+          const TrackButtons(),
+          const SizedBox(
+            height: 48,
           ),
         ],
       ),
